@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f4ed">
+  <meta name="description" content="Penned by Ella — thoughtful writing, brand storytelling and health communication for people and businesses with something meaningful to say.">
+  <title>Penned by Ella | Writing with Intention</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f8f4ed;
+      --paper-deep: #eee5d8;
+      --ink: #34251d;
+      --brown: #513a2c;
+      --brown-soft: #806b5a;
+      --gold: #b89558;
+      --gold-light: #dfc995;
+      --line: rgba(81,58,44,.16);
+      --white: #fffdf9;
+      --shadow: 0 22px 70px rgba(63,43,28,.10);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    ::selection { background: var(--gold-light); color: var(--ink); }
+    .announcement { text-align: center; padding: 9px 16px; background: var(--brown); color: #f8f1e5; font-size: .72rem; letter-spacing: .13em; text-transform: uppercase; }
+    .nav-wrap { position: sticky; top: 0; z-index: 20; background: rgba(248,244,237,.91); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+    nav { width: min(1160px, calc(100% - 40px)); margin: auto; min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; letter-spacing: -.04em; line-height: 1.05; }
+    .brand small { display: block; font: 500 .59rem var(--sans); letter-spacing: .23em; text-transform: uppercase; color: var(--brown-soft); margin-top: 6px; }
+    .nav-links { display: flex; gap: 27px; align-items: center; font-size: .82rem; color: var(--brown); }
+    .nav-links a:not(.nav-cta):hover { color: var(--gold); }
+    .nav-cta, .button { display: inline-flex; justify-content: center; align-items: center; gap: 10px; border: 1px solid var(--brown); background: var(--brown); color: var(--white); padding: 13px 20px; border-radius: 3px; font-weight: 600; font-size: .82rem; transition: transform .25s, background .25s, box-shadow .25s; cursor: pointer; }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); background: #674b38; box-shadow: 0 10px 25px #513a2c22; }
+    .button.outline { background: transparent; color: var(--brown); border-color: var(--gold); }
+    .button.outline:hover { background: var(--paper-deep); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 3px; padding: 9px 12px; }
+    .hero { width: min(1160px, calc(100% - 40px)); margin: auto; min-height: 640px; display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: clamp(38px, 7vw, 100px); padding: 76px 0 88px; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; text-transform: uppercase; color: var(--brown-soft); font-size: .7rem; font-weight: 700; letter-spacing: .2em; }
+    .eyebrow:before { content: ""; display: block; width: 34px; height: 1px; background: var(--gold); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font: 500 clamp(3.1rem, 6vw, 5.8rem)/1.02 var(--serif); letter-spacing: -.055em; margin: 22px 0; max-width: 650px; }
+    h1 em { color: var(--gold); font-weight: 400; }
+    .hero-copy > p { color: var(--brown-soft); max-width: 490px; font-size: 1.03rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .micro-proof { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 35px; color: var(--brown-soft); font-size: .75rem; }
+    .micro-proof span:before { content: "✦"; color: var(--gold); margin-right: 8px; }
+    .portrait-stage { position: relative; max-width: 460px; width: 100%; justify-self: end; padding: 0 17px 18px 0; }
+    .portrait-frame { position: relative; background: var(--paper-deep); aspect-ratio: 4 / 5; overflow: hidden; border-radius: 180px 180px 4px 4px; box-shadow: var(--shadow); border: 1px solid #b8955840; }
+    .portrait-frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .portrait-placeholder { display: none; height: 100%; min-height: 360px; padding: 28px; align-items: center; justify-content: center; text-align: center; color: var(--brown-soft); font-family: var(--serif); font-size: 1.3rem; }
+    .portrait-placeholder span { display: block; font: .76rem var(--sans); margin-top: 12px; }
+    .portrait-frame.image-missing img { display: none; }
+    .portrait-frame.image-missing .portrait-placeholder { display: flex; flex-direction: column; }
+    .portrait-outline { position: absolute; inset: 18px 0 0 18px; border: 1px solid var(--gold); border-radius: 180px 180px 4px 4px; z-index: -1; }
+    .portrait-note { position: absolute; left: -30px; bottom: 45px; padding: 15px 18px; background: var(--white); box-shadow: var(--shadow); border: 1px solid var(--line); font-family: var(--serif); font-size: 1.05rem; transform: rotate(-4deg); }
+    .portrait-note small { display: block; font: .63rem var(--sans); letter-spacing: .13em; text-transform: uppercase; color: var(--brown-soft); }
+    .marquee { overflow: hidden; border-block: 1px solid var(--line); padding: 17px 0; color: var(--brown-soft); background: #f3ede3; white-space: nowrap; }
+    .marquee-track { display: inline-flex; gap: 38px; animation: drift 32s linear infinite; font: 1rem var(--serif); letter-spacing: .03em; }
+    .marquee-track span:after { content: "✦"; color: var(--gold); margin-left: 38px; }
+    @keyframes drift { to { transform: translateX(-50%); } }
+    section.content-section { padding: 100px 20px; }
+    .section-inner { max-width: 1080px; margin: auto; }
+    .section-heading { max-width: 660px; margin: 0 auto 46px; text-align: center; }
+    .section-heading .eyebrow { justify-content: center; }
+    h2 { font: 500 clamp(2.35rem, 4vw, 3.8rem)/1.12 var(--serif); letter-spacing: -.045em; margin: 17px 0; }
+    .section-heading p { color: var(--brown-soft); max-width: 550px; margin: auto; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; align-items: center; }
+    .quote-card { background: var(--brown); color: var(--paper); padding: 42px; min-height: 310px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+    .quote-card:after { content: "“"; position: absolute; right: 12px; top: -52px; font: 14rem var(--serif); color: #ffffff0c; }
+    .quote-card .quote-mark { color: var(--gold-light); font: 4rem/.7 var(--serif); }
+    .quote-card p { position: relative; z-index: 1; font: 1.8rem/1.35 var(--serif); }
+    .quote-card small { color: #d9c8b5; letter-spacing: .12em; text-transform: uppercase; font-size: .67rem; }
+    .about-copy p { color: var(--brown-soft); }
+    .about-copy strong { color: var(--ink); }
+    .text-link { display: inline-flex; align-items: center; gap: 10px; color: var(--brown); font-weight: 700; font-size: .85rem; border-bottom: 1px solid var(--gold); padding-bottom: 5px; margin-top: 8px; }
+    .services-section { background: var(--white); }
+    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service-card { border: 1px solid var(--line); padding: 28px 25px; background: var(--paper); transition: transform .3s, box-shadow .3s, border-color .3s; }
+    .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: #b8955870; }
+    .service-number { color: var(--gold); font: 1.15rem var(--serif); }
+    .service-card h3 { font: 1.5rem var(--serif); margin: 18px 0 10px; }
+    .service-card p { color: var(--brown-soft); font-size: .88rem; margin-bottom: 20px; }
+    .service-price { font-weight: 700; color: var(--brown); font-size: .9rem; }
+    .rate-section { background: #f0e8dc; }
+    .rate-grid { display: grid; grid-template-columns: repeat(3, 1fr); align-items: stretch; gap: 18px; }
+    .rate-card { position: relative; background: var(--white); border: 1px solid #b8955845; padding: 31px 27px 28px; display: flex; flex-direction: column; min-height: 520px; box-shadow: 0 8px 30px #513a2c08; }
+    .rate-card.featured { background: var(--brown); color: var(--white); transform: translateY(-12px); box-shadow: 0 20px 50px #513a2c25; border-color: var(--gold); }
+    .popular { position: absolute; right: 16px; top: 16px; border: 1px solid #d7bd85; color: var(--gold); padding: 4px 8px; text-transform: uppercase; letter-spacing: .11em; font-size: .56rem; font-weight: 700; }
+    .plan-label { color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-size: .69rem; font-weight: 700; }
+    .rate-card h3 { font: 1.75rem var(--serif); margin: 12px 0 6px; }
+    .plan-description { color: var(--brown-soft); font-size: .82rem; min-height: 46px; }
+    .featured .plan-description, .featured .plan-sub, .featured .includes { color: #ddcfc1; }
+    .price { font: 500 2.65rem/1.1 var(--serif); letter-spacing: -.05em; margin: 17px 0 2px; }
+    .price-period { font-size: .77rem; color: var(--brown-soft); }
+    .featured .price-period { color: #ddcfc1; }
+    .plan-rule { border: 0; border-top: 1px solid var(--line); width: 100%; margin: 24px 0 17px; }
+    .featured .plan-rule { border-color: #ffffff2b; }
+    .includes { font-size: .69rem; letter-spacing: .12em; color: var(--brown-soft); text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
+    .features { list-style: none; padding: 0; margin: 0 0 26px; flex: 1; }
+    .features li { font-size: .84rem; padding: 8px 0 8px 21px; position: relative; border-bottom: 1px solid #513a2c0b; }
+    .features li:before { content: "✓"; position: absolute; left: 0; color: var(--gold); }
+    .rate-card .button { width: 100%; padding: 14px 12px; }
+    .featured .button { background: var(--gold-light); color: var(--ink); border-color: var(--gold-light); }
+    .featured .button:hover { background: #ead9af; }
+    .rate-note { color: var(--brown-soft); font-size: .76rem; text-align: center; max-width: 720px; margin: 28px auto 0; }
+    .individuals { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .individual-card { display: flex; justify-content: space-between; gap: 22px; align-items: flex-start; padding: 24px 0; border-bottom: 1px solid var(--line); }
+    .individual-card h3 { font: 1.3rem var(--serif); margin-bottom: 6px; }
+    .individual-card p { color: var(--brown-soft); font-size: .84rem; margin-bottom: 0; max-width: 410px; }
+    .individual-price { min-width: 125px; text-align: right; color: var(--brown); font-weight: 700; font-size: .86rem; }
+    .individual-price a { display: block; margin-top: 12px; color: var(--gold); font-size: .75rem; text-decoration: underline; text-underline-offset: 4px; }
+    .process { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .process-item { border-top: 1px solid var(--gold); padding-top: 20px; }
+    .process-item span { font: 1.2rem var(--serif); color: var(--gold); }
+    .process-item h3 { font: 1.35rem var(--serif); margin: 12px 0 8px; }
+    .process-item p { color: var(--brown-soft); font-size: .85rem; }
+    .contact-section { background: var(--brown); color: var(--paper); }
+    .contact-section .section-heading p { color: #ddcfc1; }
+    .contact-section .eyebrow { color: var(--gold-light); }
+    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 60px; align-items: start; }
+    .contact-copy h2 { max-width: 420px; }
+    .contact-copy > p { color: #ddcfc1; max-width: 390px; }
+    .contact-detail { border-top: 1px solid #ffffff25; margin-top: 28px; padding-top: 18px; color: #ddcfc1; font-size: .85rem; }
+    .contact-form { background: var(--white); color: var(--ink); padding: 30px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: .75rem; font-weight: 700; margin-bottom: 7px; color: var(--brown); }
+    .field input, .field textarea, .field select { width: 100%; border: 1px solid var(--line); background: #fffefa; color: var(--ink); padding: 12px 13px; border-radius: 2px; outline: none; }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px #b895581a; }
+    .field textarea { min-height: 110px; resize: vertical; }
+    .contact-form .button { width: 100%; }
+    .form-hint { color: var(--brown-soft); font-size: .72rem; margin: 12px 0 0; }
+    footer { background: #2c2019; color: #f8f1e5; padding: 32px 20px; }
+    .footer-inner { max-width: 1080px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-brand { font: 1.25rem var(--serif); }
+    footer p { color: #cdbdad; font-size: .75rem; margin: 5px 0 0; }
+    .footer-links { display: flex; gap: 18px; font-size: .78rem; color: #e5d8c9; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .floating-contact { position: fixed; right: 18px; bottom: 18px; z-index: 15; border-radius: 99px; box-shadow: 0 8px 25px #0002; padding: 13px 17px; background: #4d6d50; color: white; font-size: .8rem; font-weight: 700; }
+    .floating-contact:hover { background: #3f5b42; }
+    @media (prefers-reduced-motion: reduce) { *, *:before, *:after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
+    @media (max-width: 850px) {
+      .nav-links { gap: 15px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero { min-height: auto; gap: 36px; padding: 62px 0 70px; }
+      h1 { font-size: clamp(3rem, 8vw, 4.6rem); }
+      .about-grid { gap: 35px; }
+      .rate-grid { grid-template-columns: 1fr; max-width: 560px; margin: auto; gap: 18px; }
+      .rate-card { min-height: auto; }
+      .rate-card.featured { transform: none; }
+      .service-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { gap: 30px; }
+    }
+    @media (max-width: 600px) {
+      .announcement { font-size: .59rem; letter-spacing: .08em; }
+      nav { width: calc(100% - 30px); min-height: 68px; }
+      .brand { font-size: 1.25rem; }
+      .nav-cta { padding: 10px 12px; font-size: .73rem; }
+      .hero { width: calc(100% - 36px); grid-template-columns: 1fr; padding: 50px 0 62px; gap: 43px; }
+      .hero-copy { order: 1; }
+      .portrait-stage { order: 0; width: min(80%, 340px); justify-self: center; margin-left: 12px; }
+      .portrait-note { left: -23px; bottom: 28px; font-size: .9rem; }
+      h1 { font-size: clamp(3.2rem, 14vw, 4.6rem); }
+      .hero-copy > p { font-size: .95rem; }
+      .hero-actions .button { flex: 1; padding: 13px 12px; }
+      section.content-section { padding: 70px 18px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+      .quote-card { min-height: 245px; padding: 30px; }
+      .quote-card p { font-size: 1.55rem; }
+      .service-grid { grid-template-columns: 1fr; }
+      .individuals { grid-template-columns: 1fr; }
+      .individual-card { gap: 12px; }
+      .individual-price { min-width: 104px; font-size: .78rem; }
+      .process { grid-template-columns: 1fr; gap: 12px; }
+      .process-item { padding-bottom: 10px; }
+      .contact-form { padding: 22px 18px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .footer-links { flex-wrap: wrap; }
+      .floating-contact { right: 12px; bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- SETUP: Replace 2348012345678 below with Emmanuella's WhatsApp number.
+       Use country code, numbers only: Nigeria example 2348012345678.
+       Put her portrait in this same folder and name it emmanuella.jpg. -->
+  <div class="announcement">Thoughtful words. Meaningful connection. ✦</div>
+  <div class="nav-wrap">
+    <nav aria-label="Main navigation">
+      <a class="brand" href="#home">Penned by Ella<small>Writing · Storytelling · Health</small></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#packages">Packages</a>
+        <a href="#contact" class="nav-cta">Work with me ↗</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy reveal">
+        <div class="eyebrow">Words with purpose</div>
+        <h1>Your ideas deserve to be <em>understood.</em></h1>
+        <p>I help people, professionals and purpose-driven brands turn their ideas into clear, thoughtful writing that connects with the right audience.</p>
+        <div class="hero-actions">
+          <a class="button" href="#packages">Explore packages <span aria-hidden="true">↗</span></a>
+          <a class="button outline" href="#services">View services</a>
+        </div>
+        <div class="micro-proof"><span>Brand & personal writing</span><span>Health communication</span><span>Content with clarity</span></div>
+      </div>
+      <div class="portrait-stage reveal">
+        <div class="portrait-frame" id="portraitFrame">
+          <img src="emmanuella.jpg" alt="Emmanuella Olong, writer behind Penned by Ella" onerror="document.getElementById('portraitFrame').classList.add('image-missing')">
+          <div class="portrait-placeholder">A face behind the words<span>Add Emmanuella's photo as emmanuella.jpg</span></div>
+        </div>
+        <div class="portrait-outline"></div>
+        <div class="portrait-note">Meet the writer <small>Emmanuella Olong</small></div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee-track">
+      <span>Words that connect</span><span>Stories that stay</span><span>Content with intention</span><span>Health information made clear</span><span>Words that connect</span><span>Stories that stay</span><span>Content with intention</span><span>Health information made clear</span>
+    </div></div>
+
+    <section class="content-section" id="about">
+      <div class="section-inner about-grid">
+        <div class="quote-card reveal">
+          <div class="quote-mark">“</div>
+          <p>Good writing doesn't just fill a page. It helps the right message find the right people.</p>
+          <small>The Penned by Ella philosophy</small>
+        </div>
+        <div class="about-copy reveal">
+          <div class="eyebrow">A little about me</div>
+          <h2>Thoughtful writing, with a human touch.</h2>
+          <p>I'm <strong>Emmanuella Olong</strong>, the writer behind Penned by Ella. I bring a love for language, an interest in healthcare and a thoughtful approach to communication to every project.</p>
+          <p>From personal brands finding their voice to health-focused organisations making important information easier to understand, my goal is to make every word purposeful, clear and audience-aware.</p>
+          <a href="#contact" class="text-link">Let's talk about your project <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section services-section" id="services">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <div class="eyebrow">What I can help with</div>
+          <h2>The right words for your next step.</h2>
+          <p>Choose a single service for a specific need, or explore a monthly package for ongoing support.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card reveal">
+            <span class="service-number">01 / Social</span>
+            <h3>Social Media & LinkedIn</h3>
+            <p>Captions and professional posts shaped around your voice, audience and message.</p>
+            <div class="service-price">From ₦3,000</div>
+          </article>
+          <article class="service-card reveal">
+            <span class="service-number">02 / Editorial</span>
+            <h3>Articles & Blog Posts</h3>
+            <p>Useful, well-structured articles that inform readers and give your ideas room to breathe.</p>
+            <div class="service-price">From ₦10,000</div>
+          </article>
+          <article class="service-card reveal">
+            <span class="service-number">03 / Brand</span>
+            <h3>Personal Brand Writing</h3>
+            <p>Professional bios, LinkedIn profiles and founder stories that communicate who you are.</p>
+            <div class="service-price">From ₦20,000</div>
+          </article>
+          <article class="service-card reveal">
+            <span class="service-number">04 / Website</span>
+            <h3>Website Copy</h3>
+            <p>Clear website wording that introduces your brand, explains your offer and guides visitors.</p>
+            <div class="service-price">From ₦15,000</div>
+          </article>
+          <article class="service-card reveal">
+            <span class="service-number">05 / Editing</span>
+            <h3>Editing & Proofreading</h3>
+            <p>A careful review for clarity, grammar, flow and consistency while preserving your voice.</p>
+            <div class="service-price">From ₦5,000</div>
+          </article>
+          <article class="service-card reveal">
+            <span class="service-number">06 / Health</span>
+            <h3>Health Communication</h3>
+            <p>Evidence-informed health articles, patient education and medication-awareness content.</p>
+            <div class="service-price">Custom quote</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section rate-section" id="packages">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <div class="eyebrow">The writing rate card</div>
+          <h2>Choose the support that fits you.</h2>
+          <p>Clear monthly options for every stage of your content journey. Select a package to enquire directly on WhatsApp.</p>
+        </div>
+        <div class="rate-grid">
+          <article class="rate-card reveal">
+            <div class="plan-label">01 · The essentials</div>
+            <h3>Basic</h3>
+            <p class="plan-description">For individuals and small businesses getting started.</p>
+            <div class="price">₦25,000</div><div class="price-period">per month</div>
+            <hr class="plan-rule">
+            <div class="includes">Your package includes</div>
+            <ul class="features">
+              <li>4 social media captions or LinkedIn posts monthly</li>
+              <li>1 short article or blog post (up to 700 words)</li>
+              <li>Basic content ideas and topic suggestions</li>
+              <li>A practical starting point for consistent communication</li>
+            </ul>
+            <a class="button" href="#" data-package="Basic" data-price="₦25,000/month">Choose this package ↗</a>
+          </article>
+          <article class="rate-card featured reveal">
+            <span class="popular">Most popular</span>
+            <div class="plan-label">02 · Consistent presence</div>
+            <h3>Standard</h3>
+            <p class="plan-description">For brands ready to communicate consistently and strategically.</p>
+            <div class="price">₦50,000</div><div class="price-period">per month</div>
+            <hr class="plan-rule">
+            <div class="includes">Everything you need to stay present</div>
+            <ul class="features">
+              <li>8 social media or LinkedIn posts monthly</li>
+              <li>Repurposing existing videos, articles or notes</li>
+              <li>A monthly content plan</li>
+              <li>Captions tailored to your voice and audience</li>
+              <li>2 rounds of revisions per monthly batch</li>
+            </ul>
+            <a class="button" href="#" data-package="Standard" data-price="₦50,000/month">Choose this package ↗</a>
+          </article>
+          <article class="rate-card reveal">
+            <div class="plan-label">03 · The full partnership</div>
+            <h3>Premium</h3>
+            <p class="plan-description">For growing businesses and professionals who need broader writing support.</p>
+            <div class="price">₦100,000</div><div class="price-period">per month</div>
+            <hr class="plan-rule">
+            <div class="includes">More strategy. More depth.</div>
+            <ul class="features">
+              <li>12 social media or LinkedIn posts monthly</li>
+              <li>2 articles or blog posts (up to 1,000 words each)</li>
+              <li>Content strategy and monthly calendar</li>
+              <li>Repurposing into multiple written formats</li>
+              <li>Brand voice consistency and audience-focused messaging</li>
+              <li>Monthly review using available analytics</li>
+              <li>Up to 2 revision rounds per deliverable</li>
+            </ul>
+            <a class="button" href="#" data-package="Premium" data-price="₦100,000/month">Choose this package ↗</a>
+          </article>
+        </div>
+        <p class="rate-note">Packages are billed monthly. Final scope, delivery schedule and any additional work will be agreed before a project begins. Unused deliverables do not automatically roll over unless agreed in writing.</p>
+      </div>
+    </section>
+
+    <section class="content-section" id="individual-services">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <div class="eyebrow">One project at a time</div>
+          <h2>Individual services.</h2>
+          <p>Only need one piece of writing? Let's make that happen.</p>
+        </div>
+        <div class="individuals">
+          <div class="individual-card reveal"><div><h3>Social media caption</h3><p>A polished caption designed around your message and audience.</p></div><div class="individual-price">₦3,000–₦5,000<a href="#" data-package="Social media caption" data-price="₦3,000–₦5,000">Enquire ↗</a></div></div>
+          <div class="individual-card reveal"><div><h3>LinkedIn post</h3><p>Professional content that shares your perspective and builds credibility.</p></div><div class="individual-price">₦5,000–₦8,000<a href="#" data-package="LinkedIn post" data-price="₦5,000–₦8,000">Enquire ↗</a></div></div>
+          <div class="individual-card reveal"><div><h3>Blog post or article</h3><p>Research-aware writing, shaped to the topic, length and reader.</p></div><div class="individual-price">₦10,000–₦15,000<a href="#" data-package="Blog post or article" data-price="₦10,000–₦15,000">Enquire ↗</a></div></div>
+          <div class="individual-card reveal"><div><h3>Website copy</h3><p>Website wording that makes your offer easy to understand.</p></div><div class="individual-price">From ₦15,000<a href="#" data-package="Website copy" data-price="From ₦15,000">Enquire ↗</a></div></div>
+          <div class="individual-card reveal"><div><h3>Personal brand writing</h3><p>LinkedIn profiles, professional bios and founder stories.</p></div><div class="individual-price">From ₦20,000<a href="#" data-package="Personal brand writing" data-price="From ₦20,000">Enquire ↗</a></div></div>
+          <div class="individual-card reveal"><div><h3>Health communication</h3><p>Patient education, medication-awareness content and wellness campaigns.</p></div><div class="individual-price">Custom quote<a href="#" data-package="Health communication" data-price="Custom quote">Request a quote ↗</a></div></div>
+          <div class="individual-card reveal"><div><h3>Short-form video script</h3><p>A concise script built around a clear hook, message and call to action.</p></div><div class="individual-price">₦5,000–₦10,000<a href="#" data-package="Short-form video script" data-price="₦5,000–₦10,000">Enquire ↗</a></div></div>
+          <div class="individual-card reveal"><div><h3>Editing & proofreading</h3><p>Grammar, flow and clarity improvements while keeping your voice.</p></div><div class="individual-price">From ₦5,000<a href="#" data-package="Editing and proofreading" data-price="From ₦5,000">Enquire ↗</a></div></div>
+          <div class="individual-card reveal"><div><h3>Long-form writing</h3><p>Thought-leadership pieces, essays and in-depth website content.</p></div><div class="individual-price">From ₦20,000<a href="#" data-package="Long-form writing" data-price="From ₦20,000">Enquire ↗</a></div></div>
+          <div class="individual-card reveal"><div><h3>Brand story or founder bio</h3><p>A considered story that expresses the person and purpose behind a brand.</p></div><div class="individual-price">From ₦15,000<a href="#" data-package="Brand story or founder bio" data-price="From ₦15,000">Enquire ↗</a></div></div>
+        </div>
+        <p class="rate-note">Individual rates are introductory estimates, not fixed quotes for every project. Final pricing depends on word count, research, complexity, turnaround and the agreed scope.</p>
+      </div>
+    </section>
+
+    <section class="content-section services-section">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <div class="eyebrow">A simple process</div>
+          <h2>From first message to final draft.</h2>
+        </div>
+        <div class="process">
+          <div class="process-item reveal"><span>01</span><h3>Tell me what you need</h3><p>Share your goals, audience, preferred service and deadline.</p></div>
+          <div class="process-item reveal"><span>02</span><h3>Agree on the scope</h3><p>We'll confirm the deliverables, rate, timeline and details before work begins.</p></div>
+          <div class="process-item reveal"><span>03</span><h3>Bring the words to life</h3><p>I'll develop your content and refine it according to the agreed revision terms.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section contact-section" id="contact">
+      <div class="section-inner contact-grid">
+        <div class="contact-copy reveal">
+          <div class="eyebrow">Let's work together</div>
+          <h2>Have something meaningful to say?</h2>
+          <p>Tell me a little about your project. Whether you need one piece of writing or ongoing content support, let's find the right fit.</p>
+          <div class="contact-detail">Prefer WhatsApp? Use the form and your enquiry will be prepared as a WhatsApp message.</div>
+        </div>
+        <form class="contact-form reveal" id="enquiryForm">
+          <div class="form-row">
+            <div class="field"><label for="name">Your name</label><input id="name" name="name" required placeholder="Name"></div>
+            <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" placeholder="you@example.com"></div>
+          </div>
+          <div class="field"><label for="service">What do you need?</label>
+            <select id="service" name="service" required>
+              <option value="">Select a service</option>
+              <option>Basic package — ₦25,000/month</option>
+              <option>Standard package — ₦50,000/month</option>
+              <option>Premium package — ₦100,000/month</option>
+              <option>Social media or LinkedIn writing</option>
+              <option>Article or blog post</option>
+              <option>Personal brand writing</option>
+              <option>Website copy</option>
+              <option>Health communication</option>
+              <option>Editing and proofreading</option>
+              <option>Other / not sure yet</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="budget">Estimated budget</label>
+              <select id="budget" name="budget">
+                <option>Not sure yet</option><option>Below ₦10,000</option><option>₦10,000–₦25,000</option><option>₦25,000–₦50,000</option><option>₦50,000–₦100,000</option><option>₦100,000+</option>
+              </select>
+            </div>
+            <div class="field"><label for="deadline">Preferred deadline</label><input id="deadline" name="deadline" placeholder="e.g. 2 weeks"></div>
+          </div>
+          <div class="field"><label for="details">Tell me about your project</label><textarea id="details" name="details" required placeholder="What are you hoping to create?"></textarea></div>
+          <button class="button" type="submit">Send enquiry on WhatsApp ↗</button>
+          <p class="form-hint">This opens WhatsApp with your details filled into a message for you to review and send.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div><div class="footer-brand">Penned by Ella</div><p>Thoughtful writing. Meaningful connection.</p></div>
+      <div class="footer-links"><a href="#about">About</a><a href="#services">Services</a><a href="#packages">Rate card</a><a href="#contact">Contact</a></div>
+      <p>© <span id="year"></span> Penned by Ella</p>
+    </div>
+  </footer>
+  <a class="floating-contact" href="#contact" aria-label="Contact Penned by Ella">Let's talk ↗</a>
+
+  <script>
+    // IMPORTANT: Replace this sample number with Emmanuella's WhatsApp number.
+    // Use country code and digits only, without +, spaces or dashes.
+    const WHATSAPP_NUMBER = "2348108987253";
+
+    function openWhatsApp(message) {
+      const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    document.querySelectorAll("[data-package]").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        const packageName = link.getAttribute("data-package");
+        const price = link.getAttribute("data-price");
+        openWhatsApp("Hello Emmanuella, I'm interested in the " + packageName +
+          " (" + price + ") from Penned by Ella. Please share the next steps and availability.");
+      });
+    });
+
+    document.getElementById("enquiryForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim() || "Not provided";
+      const service = document.getElementById("service").value;
+      const budget = document.getElementById("budget").value;
+      const deadline = document.getElementById("deadline").value.trim() || "Flexible";
+      const details = document.getElementById("details").value.trim();
+      const message = "Hello Emmanuella, I'd like to enquire about working with Penned by Ella.\n\n" +
+        "Name: " + name + "\nEmail: " + email + "\nService: " + service +
+        "\nBudget: " + budget + "\nPreferred deadline: " + deadline +
+        "\nProject details: " + details;
+      openWhatsApp(message);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(function (element) {
+      revealObserver.observe(element);
+    });
+  </script>
+</body>
+</html>
